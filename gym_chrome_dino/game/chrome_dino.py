@@ -33,10 +33,11 @@ class ChromeDino():
         return self.webdriver.find_element_by_tag_name('body').send_keys(Keys.DOWN)
 
     def start(self):
-        self.webdriver.refresh()
         return self.jump()
 
     def restart(self):
+        self.webdriver.refresh()
+        self.jump()
         return self.start()
 
     def get_canvas(self):

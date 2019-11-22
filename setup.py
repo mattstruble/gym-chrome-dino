@@ -23,7 +23,11 @@ setup(
         'Operating System :: OS Independent'
     ],
     install_requries=[
-        'selenium>=3.141.0'
+        'selenium>=3.141.0',
+        'gym>=0.15.4',
+        'Pillow>=6.2.1',
+        'numpy>=1.17.3',
+        'opencv-python>=4.1.2.30'
     ],
     license='MIT',
     zip_safe=False
