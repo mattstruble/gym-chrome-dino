@@ -21,6 +21,7 @@ setup(
     package_data={
         'gym_chrome_dino': ['*.png']
     },
+    include_package_data=True,
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
