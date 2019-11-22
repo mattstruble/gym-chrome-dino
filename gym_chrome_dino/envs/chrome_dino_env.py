@@ -5,7 +5,7 @@
 
 import base64
 import io
-
+import os
 import cv2
 import gym
 import numpy as np
@@ -39,7 +39,7 @@ class ChromeDinoEnv(gym.Env, utils.EzPickle):
         self.penalty = -10
 
         self.frame = self.observation_space.low
-        self.template = cv2.imread('game_over_template.png')
+        self.template = cv2.imread(os.path.join(os.path.dirname(__file__),'game_over_template.png'))
 
     def step(self, action):
         if action not in self._action_set:
