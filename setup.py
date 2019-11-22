@@ -17,6 +17,10 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/mattstruble/gym-chrome-dino',
     packages=find_packages(),
+    package_dir={'gym_chrome_dino':'gym_chrome_dino'},
+    package_data={
+        'gym_chrome_dino': ['*.png']
+    },
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
@@ -30,5 +34,5 @@ setup(
         'opencv-python>=4.1.2.30'
     ],
     license='MIT',
-    zip_safe=False
+    zip_safe=True
 )
