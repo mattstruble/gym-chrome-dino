@@ -9,6 +9,6 @@ from gym.envs.registration import register
 
 register(
     id='ChromeDino-v0',
-    entry_points='gym_chrome_dino.envs:ChromeDinoEnv',
+    entry_point='gym_chrome_dino.envs:ChromeDinoEnv',
     kwargs={'render': True, 'chrome_driver_path': os.environ.get('CHROME_DRIVER_PATH')}
 )
