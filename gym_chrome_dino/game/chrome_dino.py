@@ -36,8 +36,7 @@ class ChromeDino():
         return self.jump()
 
     def restart(self):
-        self.webdriver.refresh()
-        self.jump()
+        self.webdriver.get('chrome://dino')
         return self.start()
 
     def get_canvas(self):
