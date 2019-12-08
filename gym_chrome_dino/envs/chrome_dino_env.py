@@ -3,6 +3,7 @@
 # Copyright (C) 2019 Matt Struble
 # Licensed under the MIT License - https://opensource.org/licenses/MIT
 
+import time
 import base64
 import io
 import os
@@ -17,7 +18,7 @@ from gym_chrome_dino.game.chrome_dino import ChromeDino
 
 
 class ChromeDinoEnv(gym.Env, utils.EzPickle):
-    metadata = {'render.modes': ['rgb_array']}
+    metadata = {'render.modes': ['rgb_array'], 'video.frames_per_second': 10}
 
     def __init__(self, chrome_driver_path, render):
         utils.EzPickle.__init__(
@@ -40,8 +41,12 @@ class ChromeDinoEnv(gym.Env, utils.EzPickle):
 
         self.frame = self.observation_space.low
         self.template = cv2.imread(os.path.join(os.path.dirname(__file__),'game_over_template.png'))
+        self.fps = 1.0 / self.metadata['video.frames_per_second']
+        self.tick = time.time()
 
     def step(self, action):
+        self._wait()
+
         if action not in self._action_set:
             raise ValueError("Invalid action: " + action)
 
@@ -92,6 +97,14 @@ class ChromeDinoEnv(gym.Env, utils.EzPickle):
 
         self.frame = np.array(rgb)
         return self.frame
+
+    def _wait(self):
+        dt = time.time() - self.tick
+
+        if dt < self.fps:
+            time.sleep(self.fps - dt)
+
+        self.tick = time.time()
 
     def get_action_meanings(self):
         return [ACTION_MEANING[i] for i in self._action_set]
