@@ -39,6 +39,7 @@ class ChromeDinoEnv(gym.Env, utils.EzPickle):
         self.reward = 1
         self.penalty = -10
 
+        self.prev_frame = self.observation_space.low
         self.frame = self.observation_space.low
         self.template = cv2.imread(os.path.join(os.path.dirname(__file__),'game_over_template.png'))
         self.fps = 1.0 / self.metadata['video.frames_per_second']
@@ -85,7 +86,9 @@ class ChromeDinoEnv(gym.Env, utils.EzPickle):
         match = cv2.matchTemplate(bgr, self.template, cv2.TM_CCOEFF_NORMED)
         _, confidence, _, _ = cv2.minMaxLoc(match)
 
-        return confidence >= 0.29
+        diff = np.max(np.absolute(np.subtract(self.frame, self.prev_frame)))
+
+        return confidence >= 0.29 or diff == 0
 
     def _update(self):
         bytearray = io.BytesIO(base64.b64decode(self.game.get_canvas()))
@@ -95,6 +98,7 @@ class ChromeDinoEnv(gym.Env, utils.EzPickle):
         rgb = Image.new("RGB", rgba.size, (255, 255, 255))
         rgb.paste(rgba, mask=rgba.split()[3])
 
+        self.prev_frame = self.frame.copy()
         self.frame = np.array(rgb)
         return self.frame
 
