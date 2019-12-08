@@ -19,7 +19,7 @@ env = gym.make('ChromeDino-v0')
 
 ### State, Actions, and Rewards
 
-* The state is a RGB numpy array with shape of (150, 600, 3).
+* The state is a RGB numpy array with shape of (150, 552, 3).
 * The available actions are 0: _do nothing_, 1: _jump_, and 2: _duck_.
 * A positive reward 1 is given when the dinosaur is alive; a negative penalty -10 is given when the dinosaur hits an obstacle.
 

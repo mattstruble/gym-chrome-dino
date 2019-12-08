@@ -30,7 +30,7 @@ class ChromeDinoEnv(gym.Env, utils.EzPickle):
         self.game = ChromeDino(chrome_driver_path=chrome_driver_path, render=render)
 
         self.observation_space = spaces.Box(
-            low=0, high=255, shape=(150, 600, 3), dtype=np.uint8
+            low=0, high=255, shape=(150, 552, 3), dtype=np.uint8
         )
 
         self._action_set = [0, 1, 2]
